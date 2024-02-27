@@ -64,7 +64,7 @@ class _DownloadPageState extends State<DownloadPage> {
               ],
             ),
             SizedBox(
-              height: 100,
+              height: 50,
             ),
             Row(
               children: [

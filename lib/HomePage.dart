@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:netflix/Info.dart';
 import 'package:netflix/Tiles/ContWatching.dart';
 import 'package:netflix/Tiles/Tiles.dart';
+import 'package:netflix/Tiles/onlyonNetflixTiles.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
 class Home extends StatefulWidget {
@@ -22,6 +23,9 @@ class _HomeState extends State<Home> {
 
   List trendingMovies = [];
   List _tvshows = [];
+  List _movies = [];
+  List _tvThrillers = [];
+  List _contWatch = [];
   final String apiKey = 'f04e5cc999451848ceaa18be32a4d5d4';
   final readaccesstoken =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMDRlNWNjOTk5NDUxODQ4Y2VhYTE4YmUzMmE0ZDVkNCIsInN1YiI6IjY1ZDRjZDc1NDk4YmMyMDE3YTcyNWE0MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G9uZQIxMPHnsOlQWgpnLDLEE6F34utaLxYUn7QV8cpM';
@@ -33,11 +37,17 @@ class _HomeState extends State<Home> {
     );
     Map trendingResult = await tmdbWithCustomLogs.v3.trending.getTrending();
     Map tvshows = await tmdbWithCustomLogs.v3.tv.getPopular();
+    Map movies = await tmdbWithCustomLogs.v3.movies.getPopular();
+    Map tvThrillers = await tmdbWithCustomLogs.v3.tv.getTopRated();
+    Map contWatch = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
 
     setState(
       () {
         trendingMovies = trendingResult['results'];
         _tvshows = tvshows['results'];
+        _movies = movies['results'];
+        _tvThrillers = tvThrillers['results'];
+        _contWatch = contWatch['results'];
       },
     );
   }
@@ -222,14 +232,17 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 //Continue watching
                 Row(
                   children: [
                     Text(
-                      'Continue Watching for [Profile name]',
+                      'Continue Watching for Sambit',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                          fontSize: 20,
                           color: Colors.white),
                     ),
                   ],
@@ -247,15 +260,15 @@ class _HomeState extends State<Home> {
                     itemBuilder: (context, index) {
                       return ContWatchingTiles(
                         imagePathh: 'https://image.tmdb.org/t/p/w500' +
-                            trendingMovies[index]['poster_path'],
-                        titleNamee: trendingMovies[index]['title'] != null
-                            ? trendingMovies[index]['title']
+                            _contWatch[index]['poster_path'],
+                        titleNamee: _contWatch[index]['title'] != null
+                            ? _contWatch[index]['title']
                             : 'Loading',
                         descriptionn: trendingMovies[index]['overview'],
                         bannerUrll: 'https://image.tmdb.org/t/p/w500' +
-                            trendingMovies[index]['backdrop_path'],
-                        yearr: trendingMovies[index]['release_date'] != null
-                            ? trendingMovies[index]['release_date']
+                            _contWatch[index]['backdrop_path'],
+                        yearr: _contWatch[index]['release_date'] != null
+                            ? _contWatch[index]['release_date']
                             : 'NA   ',
                       );
                     },
@@ -271,7 +284,7 @@ class _HomeState extends State<Home> {
                       'Whats Trending?',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                          fontSize: 20,
                           color: Colors.white),
                     ),
                   ],
@@ -312,20 +325,10 @@ class _HomeState extends State<Home> {
                         ),
                       );
                     },
-                    // children: [
-                    //   Tiles(
-                    //     imagePath: 'https://image.tmdb.org/t/p/w500' +
-                    //         trendingMovies[index]['poster'],
-                    //   ),
-                    //   Tiles(),
-                    //   Tiles(),
-                    //   Tiles(),
-                    //   Tiles(),
-                    // ],
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 //Familiar TV favorites
                 Row(
@@ -334,7 +337,7 @@ class _HomeState extends State<Home> {
                       'Familiar TV Favorites',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                          fontSize: 20,
                           color: Colors.white),
                     ),
                   ],
@@ -375,14 +378,17 @@ class _HomeState extends State<Home> {
                     },
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 //Popular on netflix
-                Row(
+                const Row(
                   children: [
                     Text(
                       'Popular on Netflix',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                          fontSize: 20,
                           color: Colors.white),
                     ),
                   ],
@@ -390,19 +396,87 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 5,
                 ),
-                // Container(
-                //   height: 150,
-                //   child: ListView(
-                //     scrollDirection: Axis.horizontal,
-                //     children: [
-                //       Tiles(),
-                //       Tiles(),
-                //       Tiles(),
-                //       Tiles(),
-                //       Tiles(),
-                //     ],
-                //   ),
-                // ),
+                Container(
+                  height: 150,
+                  child: ListView.builder(
+                    itemCount: _tvshows.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {},
+                        child: Tiles(
+                            imagePath: 'https://image.tmdb.org/t/p/w500' +
+                                _movies[index]['poster_path']),
+                      );
+                    },
+                  ),
+                ),
+                //TV Thrillers
+                SizedBox(
+                  height: 20,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'TV Thrillers',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  height: 150,
+                  child: ListView.builder(
+                    itemCount: _tvshows.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {},
+                        child: Tiles(
+                            imagePath: 'https://image.tmdb.org/t/p/w500' +
+                                _tvThrillers[index]['poster_path']),
+                      );
+                    },
+                  ),
+                ),
+                //Only on Netflix
+                SizedBox(
+                  height: 20,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'Only on Netflix',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  height: 300,
+                  child: ListView.builder(
+                    itemCount: trendingMovies.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {},
+                        child: OnlyonNetflixTiles(
+                            imagePath: 'https://image.tmdb.org/t/p/w500' +
+                                trendingMovies[index]['poster_path']),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
