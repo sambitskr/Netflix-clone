@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/ComingSoon.dart';
 import 'package:netflix/Downloads.dart';
 import 'package:netflix/HomeScreen.dart';
 import 'package:netflix/Info.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Netflix',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

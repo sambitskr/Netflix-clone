@@ -26,12 +26,7 @@ class InfoPage extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const MyHomeScreen(),
-              ),
-            );
+            Navigator.pop(context);
           },
         ),
         actions: [
