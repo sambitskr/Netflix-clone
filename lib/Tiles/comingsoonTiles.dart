@@ -1,7 +1,50 @@
 import 'package:flutter/material.dart';
 
 class ComingsoonTile extends StatelessWidget {
-  const ComingsoonTile({super.key});
+  final String desc;
+  final String coverURL;
+  final String rDate;
+  final String name;
+
+  const ComingsoonTile({
+    super.key,
+    required this.desc,
+    required this.coverURL,
+    required this.rDate,
+    required this.name,
+  });
+
+  String month() {
+    switch (rDate.substring(5, 7)) {
+      case '01':
+        return "JAN";
+      case '02':
+        return "FEB";
+      case '03':
+        return "MAR";
+      case '04':
+        return "APR";
+      case '05':
+        return "MAY";
+      case '06':
+        return "JUN";
+      case '07':
+        return "JUL";
+      case '08':
+        return "AUG";
+      case '09':
+        return "SEP";
+      case '10':
+        return "OCT";
+      case '11':
+        return "NOV";
+      case '12':
+        return "DEC";
+
+      default:
+        return "NA";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +59,11 @@ class ComingsoonTile extends StatelessWidget {
           Column(
             children: [
               Text(
-                'MAR\n 21',
-                style: TextStyle(color: Colors.white),
+                month() + "\n" + rDate.substring(8, 10),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               )
             ],
           ),
@@ -31,9 +77,11 @@ class ComingsoonTile extends StatelessWidget {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 150,
+                  height: 200,
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      image: DecorationImage(
+                          image: NetworkImage(coverURL), fit: BoxFit.cover),
+                      // color: Colors.red,
                       borderRadius: BorderRadius.circular(7)),
                 ),
                 SizedBox(
@@ -42,17 +90,30 @@ class ComingsoonTile extends StatelessWidget {
                 // icons
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.white,
+                  // color: Colors.white,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        Icons.notifications_none,
+                      Text(
+                        name,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        width: 30,
+                        width: 120,
                       ),
-                      Icon(Icons.info_outline_rounded),
+                      Icon(
+                        Icons.notifications_none,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      Icon(
+                        Icons.info_outline_rounded,
+                        size: 30,
+                        color: Colors.white,
+                      ),
                     ],
                   ),
                 ),
@@ -62,8 +123,10 @@ class ComingsoonTile extends StatelessWidget {
                 //description
                 Container(
                   child: Text(
-                    'A paragraph is a series of sentences that are organized and coherent, and are all related to a single topic. Almost every piece of writing you do that is longer than a few sentences should be organized into paragraphs. This is because paragraphs show a reader where the subdivisions of an essay begin and end, and thus help the reader see the organization of the essay and grasp its main points.',
-                    style: TextStyle(color: Colors.white),
+                    desc,
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
               ],
