@@ -7,7 +7,6 @@ import 'package:netflix/Downloads.dart';
 import 'package:netflix/HomePage.dart';
 
 import 'package:netflix/fastLaughs.dart';
-import 'package:tmdb_api/tmdb_api.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
@@ -17,35 +16,7 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
-  @override
-  void initState() {
-    loadmovies();
-
-    super.initState();
-  }
-
-  List trendingMovies = [];
-  List _tvshows = [];
-  final String apiKey = 'f04e5cc999451848ceaa18be32a4d5d4';
-  final readaccesstoken =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMDRlNWNjOTk5NDUxODQ4Y2VhYTE4YmUzMmE0ZDVkNCIsInN1YiI6IjY1ZDRjZDc1NDk4YmMyMDE3YTcyNWE0MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G9uZQIxMPHnsOlQWgpnLDLEE6F34utaLxYUn7QV8cpM';
   int _currentIndex = 0;
-
-  Future loadmovies() async {
-    TMDB tmdbWithCustomLogs = TMDB(
-      ApiKeys(apiKey, readaccesstoken),
-      logConfig: ConfigLogger(showLogs: true, showErrorLogs: true),
-    );
-    Map trendingResult = await tmdbWithCustomLogs.v3.trending.getTrending();
-    Map tvshows = await tmdbWithCustomLogs.v3.tv.getPopular();
-
-    setState(
-      () {
-        trendingMovies = trendingResult['results'];
-        _tvshows = tvshows['results'];
-      },
-    );
-  }
 
   List widgetList = [
     Home(),
