@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:netflix/intro_pages/introduction.dart';
+import 'package:netflix/intro_pages/introduction1.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -22,8 +23,8 @@ class _SplashPageState extends State<SplashPage> {
       () {},
     );
     // ignore: use_build_context_synchronously
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => const Introduction1()));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const Introduction()));
   }
 
   Widget build(BuildContext context) {
