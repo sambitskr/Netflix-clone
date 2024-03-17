@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
   List _movies = [];
   List _tvThrillers = [];
   List _contWatch = [];
+
   final String apiKey = 'f04e5cc999451848ceaa18be32a4d5d4';
   final readaccesstoken =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMDRlNWNjOTk5NDUxODQ4Y2VhYTE4YmUzMmE0ZDVkNCIsInN1YiI6IjY1ZDRjZDc1NDk4YmMyMDE3YTcyNWE0MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G9uZQIxMPHnsOlQWgpnLDLEE6F34utaLxYUn7QV8cpM';

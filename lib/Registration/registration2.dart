@@ -1,10 +1,40 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:netflix/HomeScreen.dart';
 import 'package:netflix/login.dart';
 
 class Registration2 extends StatelessWidget {
-  const Registration2({super.key});
+  final String txt;
+
+  Registration2({super.key, required this.txt});
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+
+  Future<bool> createAccount() async {
+    String email = txt;
+    String password = passwordcontroller.text.trim();
+
+    if (email == '' || password == '') {
+      log('please fill in the email or password');
+      return false;
+    } else {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+
+        log('Account created');
+      } on FirebaseAuthException catch (ex) {
+        log(ex.code.toString());
+      }
+
+      return true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +108,17 @@ class Registration2 extends StatelessWidget {
               ),
               TextField(
                 decoration: InputDecoration(
+                  hintText: txt,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  labelText: 'Email',
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
               TextField(
+                controller: passwordcontroller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -98,22 +129,37 @@ class Registration2 extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                height: 50,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'CREATE ACCOUNT',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    )
-                  ],
+              GestureDetector(
+                onTap: () async {
+                  bool isSuccess = await createAccount();
+                  if (isSuccess) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyHomeScreen(),
+                      ),
+                    );
+                  } else {
+                    log('please fill in the correct details');
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  height: 50,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'CREATE ACCOUNT',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -4,18 +4,26 @@ import 'package:flutter/widgets.dart';
 import 'package:netflix/Registration/registration2.dart';
 
 class Registration1 extends StatelessWidget {
-  const Registration1({super.key});
+  Registration1({super.key});
+
+  TextEditingController emailcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
-            child: Icon(
-              Icons.cancel_outlined,
-              size: 35,
+            child: IconButton(
+              icon: Icon(
+                Icons.close_rounded,
+                size: 35,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ),
         ],
@@ -54,6 +62,7 @@ class Registration1 extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: emailcontroller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -69,7 +78,9 @@ class Registration1 extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const Registration2()),
+                      builder: (context) => Registration2(
+                            txt: emailcontroller.text.trim(),
+                          )),
                 );
               },
               child: Container(

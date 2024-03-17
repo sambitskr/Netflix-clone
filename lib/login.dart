@@ -1,7 +1,11 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:netflix/HomeScreen.dart';
+import 'package:netflix/Registration/registration1.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,6 +15,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+
+  void loginAccount() async {
+    String email = emailcontroller.text.trim();
+    String password = passwordcontroller.text.trim();
+
+    if (email == '' || password == '') {
+      log('please fill in the login details ');
+    } else {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
+        if (userCredential.user != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomeScreen()),
+          );
+        }
+      } on FirebaseAuthException catch (ex) {
+        log(ex.code.toString());
+      }
+
+      log('Account signed in');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +70,12 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             // email
             TextField(
+              controller: emailcontroller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
-                labelText: 'Email or phone number',
+                labelText: 'Email',
               ),
             ),
             SizedBox(
@@ -51,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             //password
             TextField(
+              controller: passwordcontroller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -64,10 +97,7 @@ class _LoginPageState extends State<LoginPage> {
             //SIGN in
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyHomeScreen()),
-                );
+                loginAccount();
               },
               child: Container(
                 height: 50,
@@ -83,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       'Sign in',
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -108,9 +138,17 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'New to Netflix? Sign up now.',
-                  style: TextStyle(color: Colors.white),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Registration1()),
+                    );
+                  },
+                  child: Text(
+                    'New to Netflix? Sign up now.',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 )
               ],
             ),

@@ -123,8 +123,7 @@ class _IntroductionState extends State<Introduction> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const Registration1()),
+                  MaterialPageRoute(builder: (context) => Registration1()),
                 );
               },
               child: Container(
