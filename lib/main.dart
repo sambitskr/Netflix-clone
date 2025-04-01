@@ -7,13 +7,6 @@ import 'package:netflix/Info.dart';
 import 'package:netflix/Registration/registration1.dart';
 import 'package:netflix/Registration/registration2.dart';
 import 'package:netflix/firebase_options.dart';
-import 'package:netflix/intro_pages/introduction.dart';
-import 'package:netflix/intro_pages/introduction1.dart';
-import 'package:netflix/intro_pages/introduction2.dart';
-import 'package:netflix/intro_pages/introduction3.dart';
-import 'package:netflix/intro_pages/introduction4.dart';
-import 'package:netflix/login.dart';
-import 'package:netflix/random.dart';
 import 'package:netflix/splash.dart';
 
 void main() async {

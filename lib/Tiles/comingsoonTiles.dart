@@ -50,7 +50,6 @@ class ComingsoonTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // color: Colors.blue,
-      height: MediaQuery.of(context).size.height * 0.5,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
       child: Row(
@@ -101,9 +100,7 @@ class ComingsoonTile extends StatelessWidget {
                             fontSize: 19,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 120,
-                      ),
+                      Spacer(),
                       Icon(
                         Icons.notifications_none,
                         size: 30,

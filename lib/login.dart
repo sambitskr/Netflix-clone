@@ -70,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             // email
             TextField(
+              style: TextStyle(color: Colors.white),
               controller: emailcontroller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -83,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             //password
             TextField(
+              style: TextStyle(color: Colors.white),
               controller: passwordcontroller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(

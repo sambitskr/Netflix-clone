@@ -80,38 +80,41 @@ class _ComingsoonPageState extends State<ComingsoonPage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          //top row
-          Row(
-            children: [],
-          ),
-          Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.81,
-                    child: ListView.builder(
-                        itemCount: trendingMovies.length,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          return ComingsoonTile(
-                            desc: trendingMovies[index]['overview'],
-                            coverURL: 'https://image.tmdb.org/t/p/w500' +
-                                trendingMovies[index]['backdrop_path'],
-                            rDate: trendingMovies[index]['release_date'] != null
-                                ? trendingMovies[index]['release_date']
-                                : 'Nothingg  ',
-                            name: trendingMovies[index]['title'] != null
-                                ? trendingMovies[index]['title']
-                                : 'Loading',
-                          );
-                        }),
-                  ),
-                ],
-              )),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            //top row
+            Row(
+              children: [],
+            ),
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.81,
+                      child: ListView.builder(
+                          itemCount: trendingMovies.length,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) {
+                            return ComingsoonTile(
+                              desc: trendingMovies[index]['overview'],
+                              coverURL: 'https://image.tmdb.org/t/p/w500' +
+                                  trendingMovies[index]['backdrop_path'],
+                              rDate:
+                                  trendingMovies[index]['release_date'] != null
+                                      ? trendingMovies[index]['release_date']
+                                      : 'Nothingg  ',
+                              name: trendingMovies[index]['title'] != null
+                                  ? trendingMovies[index]['title']
+                                  : 'Loading',
+                            );
+                          }),
+                    ),
+                  ],
+                )),
+          ],
+        ),
       ),
     );
   }

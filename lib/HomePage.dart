@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
   Future loadmovies() async {
     TMDB tmdbWithCustomLogs = TMDB(
       ApiKeys(apiKey, readaccesstoken),
-      logConfig: ConfigLogger(showLogs: true, showErrorLogs: true),
+      logConfig: const ConfigLogger(showLogs: true, showErrorLogs: true),
     );
     Map trendingResult = await tmdbWithCustomLogs.v3.trending.getTrending();
     Map tvshows = await tmdbWithCustomLogs.v3.tv.getPopular();
@@ -69,7 +69,7 @@ class _HomeState extends State<Home> {
           'Images/netflixIcon.png',
         ),
         actions: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Row(
               children: [
@@ -105,14 +105,14 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.white),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'TV Shows',
                           style: TextStyle(fontSize: 12, color: Colors.white),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Container(
@@ -122,14 +122,14 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.white),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Movies',
                           style: TextStyle(fontSize: 12, color: Colors.white),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Container(
@@ -139,7 +139,7 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.white),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Categories',
                           style: TextStyle(fontSize: 12, color: Colors.white),
@@ -150,7 +150,7 @@ class _HomeState extends State<Home> {
                 ),
                 // show of thr day
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     top: 15,
                     bottom: 15,
                     right: 25,
@@ -164,7 +164,7 @@ class _HomeState extends State<Home> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(12),
-                            image: DecorationImage(
+                            image: const DecorationImage(
                                 image: AssetImage('Images/cars.jpg'),
                                 // image: NetworkImage(
                                 //     'https://image.tmdb.org/t/p/w500' +
@@ -190,7 +190,7 @@ class _HomeState extends State<Home> {
                                 borderRadius: BorderRadius.circular(3),
                                 color: Colors.white,
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.play_arrow),
@@ -209,9 +209,9 @@ class _HomeState extends State<Home> {
                               width: 130,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3),
-                                color: Color.fromRGBO(128, 128, 128, 0.5),
+                                color: const Color.fromRGBO(128, 128, 128, 0.5),
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
@@ -233,11 +233,11 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 //Continue watching
-                Row(
+                const Row(
                   children: [
                     Text(
                       'Continue Watching for Sambit',
@@ -248,7 +248,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 //continue watching tiles
@@ -275,11 +275,11 @@ class _HomeState extends State<Home> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 //ensemble TV shows
-                Row(
+                const Row(
                   children: [
                     Text(
                       'Whats Trending?',
@@ -290,7 +290,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Container(
@@ -328,11 +328,11 @@ class _HomeState extends State<Home> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 //Familiar TV favorites
-                Row(
+                const Row(
                   children: [
                     Text(
                       'Familiar TV Favorites',
@@ -343,7 +343,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Container(
@@ -379,7 +379,7 @@ class _HomeState extends State<Home> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 //Popular on netflix
@@ -394,7 +394,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Container(
@@ -413,7 +413,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 //TV Thrillers
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 const Row(
@@ -427,7 +427,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Container(
@@ -446,7 +446,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 //Only on Netflix
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 const Row(
@@ -460,7 +460,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Container(

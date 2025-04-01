@@ -71,98 +71,101 @@ class Registration2 extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-          child: Column(
-            children: [
-              Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Unlimited movies, TV shows & more',
-                      style: TextStyle(fontSize: 27),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'As a member, you can watch exclusive TV shows and movies on the mobile app and all your other devices.',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: txt,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextField(
-                controller: passwordcontroller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  labelText: 'Password',
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  bool isSuccess = await createAccount();
-                  if (isSuccess) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MyHomeScreen(),
-                      ),
-                    );
-                  } else {
-                    log('please fill in the correct details');
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+            child: Column(
+              children: [
+                Container(
                   height: 50,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'CREATE ACCOUNT',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
-                      )
-                    ],
+                  width: MediaQuery.of(context).size.width,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Unlimited movies, TV shows & more',
+                        style: TextStyle(fontSize: 27),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'As a member, you can watch exclusive TV shows and movies on the mobile app and all your other devices.',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: txt,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: passwordcontroller,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    labelText: 'Password',
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    bool isSuccess = await createAccount();
+                    if (isSuccess) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyHomeScreen(),
+                        ),
+                      );
+                    } else {
+                      log('please fill in the correct details');
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'CREATE ACCOUNT',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
